@@ -350,3 +350,11 @@ function showMessage(text, isError) {
   }
 
 }
+const firebaseConfig = {
+  apiKey: "...",
+  authDomain: "...",
+  projectId: "...",
+  storageBucket: "...",
+  messagingSenderId: "...",
+  appId: "..."
+};
