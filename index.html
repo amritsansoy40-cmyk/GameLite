@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>GameLite — HUMINGO</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .screen {
+      min-height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    /* BRAND */
+
+    .brand {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .brand-logo {
+      width: 85px;
+      height: 85px;
+      margin: auto;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(
+        145deg,
+        #ffffff,
+        #777,
+        #151515
+      );
+      color: #000;
+      font-size: 40px;
+      font-weight: 900;
+      box-shadow: 0 15px 50px rgba(255,255,255,.15);
+    }
+
+    .brand h1 {
+      margin-top: 18px;
+      font-size: 34px;
+      letter-spacing: -1px;
+    }
+
+    .developer {
+      margin-top: 7px;
+      color: #999;
+      font-size: 14px;
+    }
+
+    /* WELCOME */
+
+    .welcome-box {
+      width: 100%;
+      max-width: 850px;
+      text-align: center;
+    }
+
+    .welcome-box h2 {
+      font-size: clamp(38px, 8vw, 75px);
+      letter-spacing: -3px;
+      margin-bottom: 15px;
+    }
+
+    .welcome-box p {
+      color: #aaa;
+      line-height: 1.6;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .video-container {
+      margin: 30px auto;
+      max-width: 760px;
+      border-radius: 25px;
+      overflow: hidden;
+      background: #111;
+      border: 1px solid #292929;
+      box-shadow: 0 20px 80px rgba(0,0,0,.7);
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      max-height: 430px;
+      background: #050505;
+    }
+
+    /* TERMS */
+
+    .terms-box {
+      width: 100%;
+      max-width: 700px;
+      background: #111;
+      border: 1px solid #292929;
+      padding: 30px;
+      border-radius: 25px;
+    }
+
+    .terms-box h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .terms-text {
+      height: 260px;
+      overflow-y: auto;
+      background: #080808;
+      border-radius: 15px;
+      padding: 20px;
+      color: #aaa;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .agree {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #ddd;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .agree input {
+      width: 20px;
+      height: 20px;
+      accent-color: #fff;
+      margin-top: 2px;
+    }
+
+    /* BUTTON */
+
+    .primary-btn {
+      border: 0;
+      background: #fff;
+      color: #000;
+      padding: 14px 25px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 22px;
+      transition: .2s;
+    }
+
+    .primary-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .primary-btn:disabled {
+      opacity: .3;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* LOGIN */
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+      background: rgba(20,20,20,.95);
+      border: 1px solid #292929;
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: 0 25px 100px rgba(0,0,0,.7);
+    }
+
+    .login-card h2 {
+      font-size: 32px;
+      margin-bottom: 7px;
+    }
+
+    .login-subtitle {
+      color: #888;
+      margin-bottom: 25px;
+    }
+
+    .input {
+      width: 100%;
+      background: #080808;
+      color: #fff;
+      border: 1px solid #333;
+      padding: 15px;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+
+    .input:focus {
+      border-color: #777;
+    }
+
+    .full {
+      width: 100%;
+    }
+
+    .google-btn {
+      width: 100%;
+      border: 1px solid #444;
+      background: #fff;
+      color: #000;
+      padding: 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 700;
+      margin-top: 12px;
+    }
+
+    .link-btn {
+      border: 0;
+      background: none;
+      color: #aaa;
+      cursor: pointer;
+      margin-top: 18px;
+    }
+
+    .link-btn:hover {
+      color: #fff;
+    }
+
+    .error {
+      color: #ff7070;
+      font-size: 14px;
+      margin-top: 15px;
+      min-height: 20px;
+    }
+
+    /* APP */
+
+    .app-screen {
+      display: block;
+      padding: 0;
+    }
+
+    .navbar {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      border-bottom: 1px solid #222;
+      background: rgba(0,0,0,.85);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .user-email {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .logout {
+      border: 1px solid #333;
+      background: #111;
+      color: #fff;
+      padding: 9px 15px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 25px;
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 9vw, 90px);
+      letter-spacing: -5px;
+    }
+
+    .hero p {
+      color: #888;
+      max-width: 600px;
+      margin: 20px auto;
+      line-height: 1.6;
+    }
+
+    .games {
+      padding: 30px 7% 100px;
+    }
+
+    .games h2 {
+      font-size: 35px;
+      margin-bottom: 25px;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .game-card {
+      background: #111;
+      border: 1px solid #252525;
+      border-radius: 22px;
+      padding: 25px;
+      min-height: 180px;
+    }
+
+    .game-card .icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .game-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .game-card p {
+      color: #888;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid #222;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        padding: 0 20px;
+      }
+
+      .user-email {
+        display: none;
+      }
+
+      .terms-box,
+      .login-card {
+        padding: 22px;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     1. WELCOME + VIDEO
+===================================================== -->
+
+<section id="welcomeScreen" class="screen active">
+
+  <div class="welcome-box">
+
+    <div class="brand">
+      <div class="brand-logo">H</div>
+      <h1>GameLite</h1>
+      <div class="developer">
+        Developed by <strong>HUMINGO</strong>
+      </div>
+    </div>
+
+    <h2>Gaming. Simplified.</h2>
+
+    <p>
+      Welcome to GameLite — a modern place to discover
+      mobile-ready games and gaming information.
+    </p>
+
+    <div class="video-container">
+      <video controls playsinline>
+        <source src="intro.mp4" type="video/mp4">
+        Your browser does not support video.
+      </video>
+    </div>
+
+    <button id="watchButton" class="primary-btn">
+      Continue
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     2. TERMS & CONDITIONS
+===================================================== -->
+
+<section id="termsScreen" class="screen">
+
+  <div class="terms-box">
+
+    <div class="brand">
+      <div class="brand-logo">H</div>
+      <h1>GameLite</h1>
+      <div class="developer">
+        Developed by <strong>HUMINGO</strong>
+      </div>
+    </div>
+
+    <h2>Terms & Conditions</h2>
+
+    <div class="terms-text">
+
+      <p>
+        Welcome to GameLite.
+      </p>
+
+      <br>
+
+      <p>
+        GameLite provides information and links for
+        games that are legally available to users.
+      </p>
+
+      <br>
+
+      <p>
+        Users are responsible for following the terms
+        and copyright rules of each game publisher,
+        developer and platform.
+      </p>
+
+      <br>
+
+      <p>
+        GameLite does not provide unauthorized copies
+        of paid games or copyrighted software.
+      </p>
+
+      <br>
+
+      <p>
+        By continuing, you agree to use this service
+        responsibly and legally.
+      </p>
+
+    </div>
+
+    <label class="agree">
+
+      <input type="checkbox" id="termsCheckbox">
+
+      <span>
+        I have read and agree to all Terms & Conditions.
+      </span>
+
+    </label>
+
+    <button
+      id="acceptButton"
+      class="primary-btn"
+      disabled
+    >
+      Accept & Continue
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     3. LOGIN
+===================================================== -->
+
+<section id="loginScreen" class="screen">
+
+  <div class="login-card">
+
+    <div class="brand">
+      <div class="brand-logo">H</div>
+
+      <h1>GameLite</h1>
+
+      <div class="developer">
+        Developed by <strong>HUMINGO</strong>
+      </div>
+    </div>
+
+    <h2>Sign in</h2>
+
+    <p class="login-subtitle">
+      Sign in to continue to GameLite.
+    </p>
+
+
+    <form id="loginForm">
+
+      <input
+        id="email"
+        class="input"
+        type="email"
+        placeholder="Email address"
+        required
+      >
+
+      <input
+        id="password"
+        class="input"
+        type="password"
+        placeholder="Password"
+        minlength="6"
+        required
+      >
+
+      <button class="primary-btn full" type="submit">
+        Sign In
+      </button>
+
+    </form>
+
+
+    <button id="googleButton" class="google-btn">
+      Continue with Google
+    </button>
+
+
+    <button id="signupButton" class="link-btn">
+      Create a new account
+    </button>
+
+    <br>
+
+    <button id="forgotButton" class="link-btn">
+      Forgot password?
+    </button>
+
+    <div id="authMessage" class="error"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     4. MAIN APP
+===================================================== -->
+
+<section id="appScreen" class="app-screen" style="display:none;">
+
+  <header class="navbar">
+
+    <div class="nav-logo">
+      GameLite
+    </div>
+
+    <div class="nav-right">
+
+      <span id="userEmail" class="user-email"></span>
+
+      <button id="logoutButton" class="logout">
+        Log Out
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <section class="hero">
+
+    <div class="brand">
+      <div class="brand-logo">H</div>
+    </div>
+
+    <h1>
+      Big Games.<br>
+      Mobile Ready.
+    </h1>
+
+    <p>
+      Discover free games, official mobile versions,
+      cloud gaming options and useful game information.
+    </p>
+
+  </section>
+
+
+  <section class="games">
+
+    <h2>Explore Games</h2>
+
+    <div class="game-grid">
+
+      <div class="game-card">
+        <div class="icon">🎮</div>
+        <h3>Free Games</h3>
+        <p>
+          Discover games that are officially free to play.
+        </p>
+      </div>
+
+
+      <div class="game-card">
+        <div class="icon">📱</div>
+        <h3>Mobile Games</h3>
+        <p>
+          Find games officially available for mobile devices.
+        </p>
+      </div>
+
+
+      <div class="game-card">
+        <div class="icon">☁️</div>
+        <h3>Cloud Gaming</h3>
+        <p>
+          Explore ways to play bigger games through cloud services.
+        </p>
+      </div>
+
+
+      <div class="game-card">
+        <div class="icon">📦</div>
+        <h3>Game Information</h3>
+        <p>
+          Check game size, requirements and compatibility.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+    © 2026 HUMINGO · GameLite
+  </footer>
+
+</section>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    sendPasswordResetEmail,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+  /* =====================================================
+     REPLACE THIS CONFIG WITH YOUR FIREBASE CONFIG
+  ===================================================== */
+
+  const firebaseConfig = {
+
+    apiKey: "YOUR_API_KEY",
+
+    authDomain:
+      "YOUR_PROJECT_ID.firebaseapp.com",
+
+    projectId:
+      "YOUR_PROJECT_ID",
+
+    storageBucket:
+      "YOUR_PROJECT_ID.firebasestorage.app",
+
+    messagingSenderId:
+      "YOUR_MESSAGING_SENDER_ID",
+
+    appId:
+      "YOUR_APP_ID"
+
+  };
+
+
+  /* Firebase */
+
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth(app);
+
+  const googleProvider =
+    new GoogleAuthProvider();
+
+
+  /* =====================================================
+     SCREEN FUNCTIONS
+  ===================================================== */
+
+  const welcomeScreen =
+    document.getElementById("welcomeScreen");
+
+  const termsScreen =
+    document.getElementById("termsScreen");
+
+  const loginScreen =
+    document.getElementById("loginScreen");
+
+  const appScreen =
+    document.getElementById("appScreen");
+
+
+  function showScreen(screen) {
+
+    welcomeScreen.classList.remove("active");
+    termsScreen.classList.remove("active");
+    loginScreen.classList.remove("active");
+
+    appScreen.style.display = "none";
+
+    if (screen === "welcome") {
+      welcomeScreen.classList.add("active");
+    }
+
+    if (screen === "terms") {
+      termsScreen.classList.add("active");
+    }
+
+    if (screen === "login") {
+      loginScreen.classList.add("active");
+    }
+
+    if (screen === "app") {
+      appScreen.style.display = "block";
+    }
+  }
+
+
+  /* =====================================================
+     WELCOME → TERMS
+  ===================================================== */
+
+  document
+    .getElementById("watchButton")
+    .addEventListener("click", () => {
+
+      showScreen("terms");
+
+    });
+
+
+  /* =====================================================
+     TERMS CHECKBOX
+  ===================================================== */
+
+  const termsCheckbox =
+    document.getElementById("termsCheckbox");
+
+  const acceptButton =
+    document.getElementById("acceptButton");
+
+
+  termsCheckbox.addEventListener("change", () => {
+
+    acceptButton.disabled =
+      !termsCheckbox.checked;
+
+  });
+
+
+  acceptButton.addEventListener("click", () => {
+
+    localStorage.setItem(
+      "gameliteTermsAccepted",
+      "true"
+    );
+
+    showScreen("login");
+
+  });
+
+
+  /* =====================================================
+     EMAIL LOGIN
+  ===================================================== */
+
+  document
+    .getElementById("loginForm")
+    .addEventListener("submit", async (event) => {
+
+      event.preventDefault();
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+      const message =
+        document.getElementById("authMessage");
+
+      message.textContent = "";
+
+      try {
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+      } catch (error) {
+
+        message.textContent =
+          getFriendlyError(error);
+
+      }
+
+    });
+
+
+  /* =====================================================
+     CREATE ACCOUNT
+  ===================================================== */
+
+  document
+    .getElementById("signupButton")
+    .addEventListener("click", async () => {
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+      const message =
+        document.getElementById("authMessage");
+
+
+      if (!email || password.length < 6) {
+
+        message.textContent =
+          "Enter an email and a password of at least 6 characters.";
+
+        return;
+
+      }
+
+
+      try {
+
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+      } catch (error) {
+
+        message.textContent =
+          getFriendlyError(error);
+
+      }
+
+    });
+
+
+  /* =====================================================
+     GOOGLE LOGIN
+  ===================================================== */
+
+  document
+    .getElementById("googleButton")
+    .addEventListener("click", async () => {
+
+      const message =
+        document.getElementById("authMessage");
+
+      message.textContent = "";
+
+      try {
+
+        await signInWithPopup(
+          auth,
+          googleProvider
+        );
+
+      } catch (error) {
+
+        message.textContent =
+          getFriendlyError(error);
+
+      }
+
+    });
+
+
+  /* =====================================================
+     PASSWORD RESET
+  ===================================================== */
+
+  document
+    .getElementById("forgotButton")
+    .addEventListener("click", async () => {
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const message =
+        document.getElementById("authMessage");
+
+
+      if (!email) {
+
+        message.textContent =
+          "Enter your email address first.";
+
+        return;
+
+      }
+
+
+      try {
+
+        await sendPasswordResetEmail(
+          auth,
+          email
+        );
+
+        message.style.color = "#8fff9a";
+
+        message.textContent =
+          "Password reset email sent.";
+
+      } catch (error) {
+
+        message.style.color = "#ff7070";
+
+        message.textContent =
+          getFriendlyError(error);
+
+      }
+
+    });
+
+
+  /* =====================================================
+     AUTH STATE
+  ===================================================== */
+
+  onAuthStateChanged(auth, (user) => {
+
+    const accepted =
+      localStorage.getItem(
+        "gameliteTermsAccepted"
+      ) === "true";
+
+
+    if (user && accepted) {
+
+      document.getElementById("userEmail")
+        .textContent =
+        user.email || "Signed in";
+
+      showScreen("app");
+
+    } else if (user && !accepted) {
+
+      showScreen("terms");
+
+    } else {
+
+      showScreen(
+        accepted ? "login" : "welcome"
+      );
+
+    }
+
+  });
+
+
+  /* =====================================================
+     LOGOUT
+  ===================================================== */
+
+  document
+    .getElementById("logoutButton")
+    .addEventListener("click", async () => {
+
+      await signOut(auth);
+
+      showScreen("login");
+
+    });
+
+
+  /* =====================================================
+     FRIENDLY FIREBASE ERRORS
+  ===================================================== */
+
+  function getFriendlyError(error) {
+
+    switch (error.code) {
+
+      case "auth/invalid-email":
+        return "Please enter a valid email.";
+
+      case "auth/invalid-credential":
+        return "Incorrect email or password.";
+
+      case "auth/email-already-in-use":
+        return "This email already has an account.";
+
+      case "auth/weak-password":
+        return "Password must be at least 6 characters.";
+
+      case "auth/popup-closed-by-user":
+        return "Google sign-in was cancelled.";
+
+      case "auth/popup-blocked":
+        return "Please allow popups for Google sign-in.";
+
+      default:
+        return error.message || "Something went wrong.";
+
+    }
+
+  }
+
+</script>
+
+</body>
+  </html>
