@@ -1,0 +1,280 @@
+/* ================================
+   GameLite - HUMINGO
+   Main Stylesheet
+================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #050505;
+  --card: #111111;
+  --card-light: #181818;
+  --text: #ffffff;
+  --muted: #a1a1a1;
+  --border: #292929;
+  --accent: #ffffff;
+  --danger: #ff4d4d;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ================================
+   Common
+================================ */
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ================================
+   Welcome Screen
+================================ */
+
+.screen {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.brand {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+
+.developer {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 35px;
+}
+
+/* ================================
+   Cards
+================================ */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.card h1,
+.card h2 {
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ================================
+   Logo
+================================ */
+
+.logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+/* ================================
+   Buttons
+================================ */
+
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 15px 18px;
+  margin-top: 14px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: #1c1c1c;
+  color: #fff;
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: #252525;
+}
+
+/* ================================
+   Terms & Conditions
+================================ */
+
+.terms-box {
+  max-height: 280px;
+  overflow-y: auto;
+  text-align: left;
+  background: #0b0b0b;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  margin: 20px 0;
+}
+
+.terms-box h3 {
+  margin: 18px 0 8px;
+}
+
+.terms-box h3:first-child {
+  margin-top: 0;
+}
+
+.terms-box p,
+.terms-box li {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.terms-box ul {
+  padding-left: 20px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  margin: 15px 0;
+  color: #ddd;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.checkbox-row input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: #fff;
+}
+
+/* ================================
+   Login / Signup
+================================ */
+
+.auth-form {
+  margin-top: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 15px;
+  margin-top: 12px;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+  background: #0b0b0b;
+  color: #fff;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #777;
+}
+
+.input::placeholder {
+  color: #666;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #666;
+  margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  background: var(--border);
+  flex: 1;
+}
+
+.link {
+  color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+/* ================================
+   Main GameLite App
+================================ */
+
+.app {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.navbar {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0 25px;
+}
+
+.nav-brand {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.logout-btn {
+  background: #161616;
+  color: #fff;
+  border:
