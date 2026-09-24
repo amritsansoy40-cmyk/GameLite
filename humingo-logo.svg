@@ -1,0 +1,131 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 512 512"
+  width="512"
+  height="512"
+>
+  <defs>
+    <linearGradient id="chrome" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#cfd4da"/>
+      <stop offset="50%" stop-color="#6f7780"/>
+      <stop offset="72%" stop-color="#f5f7fa"/>
+      <stop offset="100%" stop-color="#8b929a"/>
+    </linearGradient>
+
+    <linearGradient id="highlight" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#59616a"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#b9c0c8"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow
+        dx="0"
+        dy="12"
+        stdDeviation="10"
+        flood-opacity="0.35"
+      />
+    </filter>
+  </defs>
+
+  <!-- HUMINGO Hummingbird -->
+  <g filter="url(#shadow)">
+
+    <!-- Main body -->
+    <path
+      d="M278 126
+         C238 139 207 172 198 211
+         C190 245 202 279 228 303
+         C249 323 276 334 306 332
+         C338 330 367 313 384 288
+         L350 269
+         C334 288 313 299 290 296
+         C266 293 249 279 242 258
+         C234 234 241 208 258 190
+         C274 173 296 165 318 166
+         Z"
+      fill="url(#chrome)"
+    />
+
+    <!-- Upper wing -->
+    <path
+      d="M266 191
+         C231 155 193 119 145 98
+         C175 139 187 177 191 214
+         C212 201 237 192 266 191
+         Z"
+      fill="url(#highlight)"
+    />
+
+    <!-- Lower wing -->
+    <path
+      d="M245 272
+         C211 293 180 325 151 370
+         C197 351 238 331 274 307
+         Z"
+      fill="url(#chrome)"
+    />
+
+    <!-- Head -->
+    <path
+      d="M288 120
+         C313 94 348 82 379 91
+         C399 97 415 111 423 128
+         C406 125 389 129 374 140
+         C358 152 345 166 337 181
+         L301 163
+         C309 147 304 133 288 120
+         Z"
+      fill="url(#chrome)"
+    />
+
+    <!-- Beak -->
+    <path
+      d="M407 125
+         L488 108
+         L420 143
+         Z"
+      fill="url(#highlight)"
+    />
+
+    <!-- Tail -->
+    <path
+      d="M245 288
+         C208 315 171 343 119 378
+         C158 373 202 367 242 352
+         C265 343 283 331 299 315
+         Z"
+      fill="url(#chrome)"
+    />
+
+    <!-- Body highlight -->
+    <path
+      d="M280 151
+         C256 171 242 195 239 220
+         C236 247 247 271 267 286"
+      fill="none"
+      stroke="#ffffff"
+      stroke-width="7"
+      stroke-linecap="round"
+      opacity="0.75"
+    />
+
+    <!-- Eye -->
+    <circle
+      cx="383"
+      cy="119"
+      r="7"
+      fill="#111111"
+    />
+
+    <!-- Small eye highlight -->
+    <circle
+      cx="385"
+      cy="117"
+      r="2"
+      fill="#ffffff"
+    />
+
+  </g>
+</svg>
