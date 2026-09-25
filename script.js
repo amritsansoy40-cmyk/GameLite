@@ -1,4 +1,4 @@
-// ======================================
+ki// ======================================
 // GameLite - HUMINGO
 // Firebase Authentication
 // ======================================
@@ -476,3 +476,125 @@ function escapeHTML(text) {
   return div.innerHTML;
     }
 <script type="module" src="script.js"></script>
+// ==========================================
+// FIREBASE + GOOGLE LOGIN
+// ==========================================
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+// ==========================================
+// 1. FIREBASE CONFIG
+// ==========================================
+// Firebase Console → Project Settings → Your apps
+// से अपनी actual Firebase configuration यहाँ डालो.
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.firebasestorage.app",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+
+// ==========================================
+// 2. INITIALIZE FIREBASE
+// ==========================================
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+
+
+// ==========================================
+// 3. GOOGLE LOGIN
+// ==========================================
+
+window.googleLogin = async function () {
+
+  try {
+
+    const result = await signInWithPopup(auth, provider);
+
+    const user = result.user;
+
+    console.log("Google Login Successful:", user);
+
+    alert("Welcome, " + (user.displayName || "User") + " 🎉");
+
+    // User information
+    console.log("Name:", user.displayName);
+    console.log("Email:", user.email);
+    console.log("Photo:", user.photoURL);
+
+  } catch (error) {
+
+    console.error("Google Login Error:", error);
+
+    alert("Google Login failed ❌\n" + error.message);
+
+  }
+
+};
+
+
+// ==========================================
+// 4. LOGOUT
+// ==========================================
+
+window.googleLogout = async function () {
+
+  try {
+
+    await signOut(auth);
+
+    alert("Logged out successfully ✅");
+
+  } catch (error) {
+
+    console.error("Logout Error:", error);
+
+    alert("Logout failed ❌");
+
+  }
+
+};
+
+
+// ==========================================
+// 5. CHECK LOGIN STATUS
+// ==========================================
+
+onAuthStateChanged(auth, (user) => {
+
+  if (user) {
+
+    console.log("User is logged in ✅");
+
+    console.log("Name:", user.displayName);
+    console.log("Email:", user.email);
+
+  } else {
+
+    console.log("No user is logged in.");
+
+  }
+
+});
+
+
+// ==========================================
+// END
+// ==========================================
