@@ -598,3 +598,73 @@ onAuthStateChanged(auth, (user) => {
 // ==========================================
 // END
 // ==========================================
+// Firebase imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+// 🔥 Firebase Configuration
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// Google Sign-In
+const googleLoginBtn = document.getElementById("googleLogin");
+
+if (googleLoginBtn) {
+  googleLoginBtn.addEventListener("click", async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+
+      const user = result.user;
+
+      console.log("Google Login Successful:", user);
+
+      alert(`Welcome, ${user.displayName}!`);
+
+    } catch (error) {
+      console.error("Google Login Error:", error);
+      alert("Google Sign-In failed: " + error.message);
+    }
+  });
+}
+
+// Check login status
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("Logged in:", user.displayName);
+    console.log("Email:", user.email);
+    console.log("Photo:", user.photoURL);
+  } else {
+    console.log("User is not logged in");
+  }
+});
+
+// Logout
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      alert("Logged out successfully!");
+    } catch (error) {
+      console.error("Logout Error:", error);
+    }
+  });
+}
