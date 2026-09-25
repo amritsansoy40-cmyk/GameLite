@@ -1067,7 +1067,29 @@
 
 </body>
   </html>
-<head>
-  ...
-  <!-- Google AdSense code goes here -->
-</head>
+<section class="social-feed" id="socialFeed">
+  <div class="social-feed-header">
+    <h2>Community Feed</h2>
+    <p>Share your gaming moments</p>
+  </div>
+
+  <div id="feedPosts"></div>
+
+  <!-- Floating Create Button -->
+  <button class="create-post-btn" id="createPostBtn" aria-label="Create post">
+    +
+  </button>
+
+  <!-- Create Post Menu -->
+  <div class="create-menu" id="createMenu">
+    <button id="uploadVideoBtn">🎥 Upload Video</button>
+    <button id="createTextBtn">📝 Create Post</button>
+  </div>
+
+  <input
+    type="file"
+    id="videoInput"
+    accept="video/*"
+    hidden
+  />
+</section>
