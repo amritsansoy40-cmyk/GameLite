@@ -358,3 +358,120 @@ const firebaseConfig = {
   messagingSenderId: "...",
   appId: "..."
 };
+// =========================
+// GameLite Social Feed
+// =========================
+
+const createPostBtn = document.getElementById("createPostBtn");
+const createMenu = document.getElementById("createMenu");
+const uploadVideoBtn = document.getElementById("uploadVideoBtn");
+const createTextBtn = document.getElementById("createTextBtn");
+const videoInput = document.getElementById("videoInput");
+const feedPosts = document.getElementById("feedPosts");
+
+// Open / close + menu
+if (createPostBtn) {
+  createPostBtn.addEventListener("click", () => {
+    createMenu.classList.toggle("active");
+  });
+}
+
+// Upload video
+if (uploadVideoBtn) {
+  uploadVideoBtn.addEventListener("click", () => {
+    videoInput.click();
+  });
+}
+
+// When a video is selected
+if (videoInput) {
+  videoInput.addEventListener("change", () => {
+    const file = videoInput.files[0];
+
+    if (!file) return;
+
+    const videoURL = URL.createObjectURL(file);
+
+    const post = document.createElement("article");
+    post.className = "feed-post";
+
+    post.innerHTML = `
+      <div class="feed-post-text">
+        🎮 New gaming video
+      </div>
+
+      <video controls playsinline>
+        <source src="${videoURL}" type="${file.type}">
+        Your browser does not support video playback.
+      </video>
+
+      <div class="feed-actions">
+        <button onclick="likePost(this)">❤️ Like</button>
+        <button onclick="sharePost()">🔗 Share</button>
+      </div>
+    `;
+
+    feedPosts.prepend(post);
+
+    createMenu.classList.remove("active");
+
+    videoInput.value = "";
+  });
+}
+
+// Create text post
+if (createTextBtn) {
+  createTextBtn.addEventListener("click", () => {
+    const text = prompt("What do you want to share?");
+
+    if (!text || !text.trim()) return;
+
+    const post = document.createElement("article");
+    post.className = "feed-post";
+
+    post.innerHTML = `
+      <div class="feed-post-text">
+        ${escapeHTML(text)}
+      </div>
+
+      <div class="feed-actions">
+        <button onclick="likePost(this)">❤️ Like</button>
+        <button onclick="sharePost()">🔗 Share</button>
+      </div>
+    `;
+
+    feedPosts.prepend(post);
+
+    createMenu.classList.remove("active");
+  });
+}
+
+// Like button
+function likePost(button) {
+  button.classList.toggle("liked");
+
+  if (button.classList.contains("liked")) {
+    button.textContent = "❤️ Liked";
+  } else {
+    button.textContent = "❤️ Like";
+  }
+}
+
+// Share
+function sharePost() {
+  if (navigator.share) {
+    navigator.share({
+      title: "GameLite",
+      text: "Check out this gaming post on GameLite!"
+    });
+  } else {
+    alert("Share is not supported on this browser.");
+  }
+}
+
+// Basic text protection
+function escapeHTML(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+    }
