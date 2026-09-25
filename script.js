@@ -475,3 +475,4 @@ function escapeHTML(text) {
   div.textContent = text;
   return div.innerHTML;
     }
+<script type="module" src="script.js"></script>
