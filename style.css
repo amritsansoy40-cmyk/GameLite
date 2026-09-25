@@ -278,3 +278,129 @@ button {
   background: #161616;
   color: #fff;
   border:
+/* =========================
+   GameLite Social Feed
+   ========================= */
+
+.social-feed {
+  position: relative;
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.social-feed-header {
+  margin-bottom: 20px;
+}
+
+.social-feed-header h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.social-feed-header p {
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+.feed-post {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 15px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.feed-post video {
+  width: 100%;
+  max-height: 450px;
+  border-radius: 12px;
+  display: block;
+  margin-top: 12px;
+}
+
+.feed-post-text {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.feed-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.feed-actions button {
+  border: none;
+  background: #f1f1f1;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* Floating + button */
+
+.create-post-btn {
+  position: fixed;
+  right: 22px;
+  bottom: 90px;
+
+  width: 58px;
+  height: 58px;
+
+  border: none;
+  border-radius: 50%;
+
+  font-size: 32px;
+  line-height: 1;
+
+  cursor: pointer;
+  z-index: 1000;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* Create menu */
+
+.create-menu {
+  position: fixed;
+  right: 22px;
+  bottom: 155px;
+
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+
+  z-index: 999;
+}
+
+.create-menu.active {
+  display: flex;
+}
+
+.create-menu button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .social-feed {
+    padding: 14px;
+    margin: 20px auto;
+  }
+
+  .create-post-btn {
+    right: 16px;
+    bottom: 80px;
+  }
+
+  .create-menu {
+    right: 16px;
+    bottom: 145px;
+  }
+}
